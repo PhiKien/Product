@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="ProductManagementDB-Web.config Connection String" description="ProductManagementDB Connection String used in web.config by the application to access the database." defaultValue="Data Source=DESKTOP-36M90EA\SQLEXPRESS;Initial Catalog=ProductManagementDB;Integrated Security=True;MultipleActiveResultSets=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\PC_KIEN\\Documents\\FPTS\\ProductManagement\\ProductManagement\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='ProductManagementDB']/@connectionString" />
+  </parameter>
+</parameters>

@@ -1,0 +1,86 @@
+﻿body {
+}
+
+.text-aliceblue {
+    color: aliceblue
+}
+
+.text-black {
+    color: black;
+}
+
+.btn-edit-Airpods {
+    background-color: aliceblue;
+    border-style: groove;
+    border-radius: 5px;
+    text-align: center;
+    margin-left: 240px;
+    margin-top: 10px;
+}
+
+.main-div-index {
+    margin-top: 21px;
+}
+
+.div-btn-cretae {
+    border-radius: 5px;
+    width: 100px;
+    height: 40px;
+    background-color: cornflowerblue;
+    float: left;
+    margin-left: 20px;
+    text-align: center;
+}
+
+.btn-create {
+    margin-top: 10px;
+    background-color: cornflowerblue;
+    border-style: hidden;
+}
+
+.form-data-product {
+    margin-top: 40px;
+}
+
+.item-data {
+    border-style: groove;
+    border-radius: 5px;
+    height: 120px;
+    width: 50%;
+    margin-left: 250px;
+}
+
+.item-name-desc {
+    float: left;
+    width: 60%;
+}
+
+.item-info {
+    margin-left: 340px;
+    width: 40%;
+}
+
+.item-numberinstock {
+    border-radius: 5px;
+    width: 100px;
+    height: 20px;
+    margin-left: 112px;
+    background-color: cornflowerblue;
+    text-align: center;
+    font-size: 15px;
+    color: aliceblue;
+    margin-top: 40px
+}
+
+.paged-list-pager {
+    margin-top: -30px;
+    margin-left: 690px;
+}
+
+.btn-edit {
+    margin-top: 10px;
+    margin-left: 170px;
+    border-radius: 5px;
+    border-style: groove;
+    background-color: inherit;
+}

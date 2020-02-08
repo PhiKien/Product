@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ProductManagement.ViewModels.ProductViewModel>
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/modernizr-2.8.3.js"></script>
+<script src="~/Scripts/mustache.js"></script>
+<script src="~/Scripts/Product/index.js"></script>
+
+<script type="text/javascript">
+    var pro = new productController();
+    pro.init();
+</script>
+
+<div class="main-div-index">
+    <div class="div-btn-cretae">
+        <button class="btn-create">
+            @Html.ActionLink("New Product", "Create", new { }, new { @class = "text-aliceblue" })
+        </button>
+    </div>
+    <br />
+    <div class="form-data-product" id="list_product">
+        @foreach (var item in Model)
+        {
+            <div class="item-data">
+                <div class="item-name-desc">
+                    <h3 style="margin-left:30px"><b>@Html.DisplayFor(modelItem => item.Name)</b></h3>
+                    <h3 style="margin-left:30px">@Html.DisplayFor(modelItem => item.Description)</h3>
+                </div>
+                <div class="item-info">
+                    <div class="item-numberinstock">
+                        Instock: @Html.DisplayFor(modelItem => item.NumberInStock)
+                    </div>
+                    <div>
+                        <button class="btn-edit">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "text-black" })
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+        }
+        <div class="paged-list-pager">
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+        </div>
+    </div>
+
+    <div class="form-data-product" id="lstProduct">
+
+    </div>
+
+</div>
+
+<script id="dataProduct" type="x-tmpl-mustache">
+    <div class="item-data">
+        <div class="item-name-desc">
+            <h3 style="margin-left:30px"><b>{{Name}}</b></h3>
+            <h3 style="margin-left:30px">{{Description}}</h3>
+        </div>
+        <div class="item-info">
+            <div class="item-numberinstock">
+                Instock: {{NumberInStock}}
+            </div>
+            
+            <button type="button" class="btn-edit" id="btnEdit" data-id="{{ID}}">
+                Edit               
+            </button>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="paged-list-pager">      
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+    </div>
+</script>
