@@ -23,10 +23,6 @@ namespace ProductManagement.Repository.Implement
             _mapper = mapper;
         }
 
-        public ProductRepository()
-        {
-        }
-
         public void Add(ProductViewModel products)
         {
             var model = _mapper.Map<ProductViewModel, Product>(products);

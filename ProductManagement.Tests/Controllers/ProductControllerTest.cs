@@ -11,7 +11,7 @@ namespace ProductManagement.Tests.Controllers
     public class ProductControllerTest
     {
         private ProductController controller = new ProductController();
-        private ProductRepository repository = new ProductRepository();
+        
 
         [TestMethod]
         public void FindProductByCategoryID()

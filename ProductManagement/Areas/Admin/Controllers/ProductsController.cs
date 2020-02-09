@@ -10,20 +10,30 @@ using System.Web.Mvc;
 using PagedList;
 using ProductManagement.Common;
 using ProductManagement.Models;
+using ProductManagement.Repository.Interface;
 
 namespace ProductManagement.Areas.Admin.Controllers
 {
     public class ProductsController : BaseController
     {
         private ProductContext db = new ProductContext();
+        private IProductProcRepository _productProcRepository;
+
+        public ProductsController(IProductProcRepository productProcRepository)
+        {
+            _productProcRepository = productProcRepository;
+        }
 
         // GET: Admin/Products
         public ActionResult Index(int? page)
         {
-            var listProduct = compareList(listProducts(null), listCategorys(null));
+            var products = _productProcRepository.GetAll();
+            var categorys = listCategory();
+
+            var listProduct = compareList((List<Product>)products, categorys);
 
             var list = listProduct.OrderBy(p => p.ID);
-            
+
             return View(list.ToPagedList(page == null ? 1 : page.Value, 5));
         }
 
@@ -34,9 +44,9 @@ namespace ProductManagement.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var products = listProducts(id);
 
-            Product product = products.Single(p => p.ID == id);
+            var product = _productProcRepository.GetById(id);
+
             if (product == null)
             {
                 return HttpNotFound();
@@ -47,7 +57,7 @@ namespace ProductManagement.Areas.Admin.Controllers
         // GET: Admin/Products/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryID = new SelectList(db.Categorys, "ID", "Name");
+            ViewBag.CategoryID = new SelectList(listCategory(), "ID", "Name");
             return View();
         }
 
@@ -60,12 +70,11 @@ namespace ProductManagement.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
-                db.SaveChanges();
+                _productProcRepository.Add(product);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryID = new SelectList(db.Categorys, "ID", "Name", product.CategoryID);
+            ViewBag.CategoryID = new SelectList(listCategory(), "ID", "Name", product.CategoryID);
             return View(product);
         }
 
@@ -76,12 +85,15 @@ namespace ProductManagement.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+
+            var product = _productProcRepository.GetById(id);
+
+            //Product product = db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryID = new SelectList(db.Categorys, "ID", "Name", product.CategoryID);
+            ViewBag.CategoryID = new SelectList(listCategory(), "ID", "Name", product.CategoryID);
             return View(product);
         }
 
@@ -94,13 +106,15 @@ namespace ProductManagement.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
+                //db.Entry(product).State = EntityState.Modified;
+                //db.SaveChanges();
+                _productProcRepository.Update(product);
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryID = new SelectList(db.Categorys, "ID", "Name", product.CategoryID);
+            ViewBag.CategoryID = new SelectList(listCategory(), "ID", "Name", product.CategoryID);
             return View(product);
         }
+
 
         // GET: Admin/Products/Delete/5
         public ActionResult Delete(int? id)
@@ -109,7 +123,9 @@ namespace ProductManagement.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+
+            var product = _productProcRepository.GetById(id);
+
             if (product == null)
             {
                 return HttpNotFound();
@@ -122,9 +138,10 @@ namespace ProductManagement.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
-            db.SaveChanges();
+            //Product product = db.Products.Find(id);
+            //db.Products.Remove(product);
+            //db.SaveChanges();
+            _productProcRepository.Delete(id);
             return RedirectToAction("Index");
         }
 
@@ -137,34 +154,18 @@ namespace ProductManagement.Areas.Admin.Controllers
             base.Dispose(disposing);
         }
 
-        //get list category
-        private List<Category> listCategorys(int? id)
+        //get all category
+        private List<Category> listCategory()
         {
-            if (id == null)
-            {
-                var listCategory = db.Database.SqlQuery<Category>(CommonConstantProc.PROC_GET_ALL_CATEGORY).ToList();
-                return listCategory;
-            }
-            else
-            {
-                var listCategory = db.Database.SqlQuery<Category>(CommonConstantProc.PROC_GET_CATEGORY_BY_ID, id).ToList();
-                return listCategory;
-            }
+            var categorys = db.Database.SqlQuery<Category>(CommonConstantProc.PROC_GET_ALL_CATEGORY).ToList();
+            return categorys;
         }
 
-        //get list product
-        private List<Product> listProducts(int? id)
+        //get category by id
+        private Category getCategoryByID(int id)
         {
-            if (id == null)
-            {
-                var listProduct = db.Database.SqlQuery<Product>(CommonConstantProc.PROC_GET_ALL_PRODUCT).ToList();
-                return listProduct;
-            }
-            else
-            {
-                var listProduct = db.Database.SqlQuery<Product>(CommonConstantProc.PROC_GET_PRODUCT_BY_ID, new SqlParameter("@productID", id)).ToList();
-                return listProduct;
-            }
+            var category = db.Database.SqlQuery<Category>(CommonConstantProc.PROC_GET_CATEGORY_BY_ID, id).Single();
+            return category;
         }
 
         //compare and assign

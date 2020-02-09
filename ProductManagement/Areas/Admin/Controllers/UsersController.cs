@@ -16,18 +16,19 @@ namespace ProductManagement.Areas.Admin.Controllers
     public class UsersController : BaseController
     {
         private ProductContext db = new ProductContext();
-        IUserRepository _userRepository;
+        private IUserProcRepository _userProcRepository;
 
-        public UsersController(IUserRepository userRepository)
+        public UsersController(IUserProcRepository userProcRepository)
         {
-            _userRepository = userRepository;
+            _userProcRepository = userProcRepository;
         }
+
+
 
         // GET: Admin/Users
         public ActionResult Index()
         {
-            var users = db.Users.Include(u => u.Role);
-            return View(users.ToList());
+            return View(_userProcRepository.GetAll());
         }
 
         // GET: Admin/Users/Details/5
@@ -37,7 +38,7 @@ namespace ProductManagement.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
+            User user = _userProcRepository.GetById(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -61,7 +62,7 @@ namespace ProductManagement.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var users = _userRepository.GetAll().FirstOrDefault(u => u.UserName == userViewModel.UserName);
+                var users = _userProcRepository.GetAll().FirstOrDefault(u => u.UserName == userViewModel.UserName);
                 if(users == null)
                 {
                     var passwordHash = Encryptor.MD5Hash(userViewModel.Password);
@@ -78,7 +79,7 @@ namespace ProductManagement.Areas.Admin.Controllers
                     userViewModel2.Status = userViewModel.Status;
                     userViewModel2.RoleID = userViewModel.RoleID;
 
-                    _userRepository.Add(userViewModel2);
+                    _userProcRepository.Add(userViewModel2);
 
                     return RedirectToAction("Index");
                 } else
@@ -98,7 +99,7 @@ namespace ProductManagement.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
+            User user = _userProcRepository.GetById(id);
             //User user2 = new User(user.UserName, user.Password, user.Name, user.Address, user.Email, user.Phone, user.CreateDate, user.Status, user.RoleID);
             if (user == null)
             {
@@ -117,8 +118,7 @@ namespace ProductManagement.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
+                _userProcRepository.Update(user);
                 return RedirectToAction("Index");
             }
             ViewBag.RoleID = new SelectList(db.Roles, "ID", "Name", user.RoleID);
@@ -132,7 +132,7 @@ namespace ProductManagement.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
+            User user = _userProcRepository.GetById(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -145,9 +145,7 @@ namespace ProductManagement.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            User user = db.Users.Find(id);
-            db.Users.Remove(user);
-            db.SaveChanges();
+            _userProcRepository.Delete(id);
             return RedirectToAction("Index");
         }
 

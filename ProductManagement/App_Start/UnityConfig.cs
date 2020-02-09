@@ -39,8 +39,10 @@ namespace ProductManagement
 
             container.RegisterType<IUnitOfWork, UnitOfWork>();
             container.RegisterType<IProductRepository, ProductRepository>();
+            container.RegisterType<IProductProcRepository, ProductProcRepository>();
             container.RegisterType<ICategoryRepository, CategoryRepository>();
             container.RegisterType<IUserRepository, UserRepository>();
+            container.RegisterType<IUserProcRepository, UserProcRepository>();
             container.RegisterType<IRoleRepository, RoleRepository>();
             container.RegisterInstance(mapper);
 
