@@ -1834,6 +1834,7 @@
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Product\Index.css" />
     <Content Include="Content\Product\Create.css" />
+    <Content Include="Content\Product\ProductTable.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
