@@ -28,8 +28,9 @@ namespace ProductManagement.Areas.Admin.Controllers
         // GET: Admin/Users
         public ActionResult Index()
         {
-            return View(_userProcRepository.GetAll());
-        }
+            var listUser = compareList((List<User>)_userProcRepository.GetAll(), roles());
+            return View(listUser);
+        }        
 
         // GET: Admin/Users/Details/5
         public ActionResult Details(long? id)
@@ -63,7 +64,7 @@ namespace ProductManagement.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var users = _userProcRepository.GetAll().FirstOrDefault(u => u.UserName == userViewModel.UserName);
-                if(users == null)
+                if (users == null)
                 {
                     var passwordHash = Encryptor.MD5Hash(userViewModel.Password);
 
@@ -82,10 +83,11 @@ namespace ProductManagement.Areas.Admin.Controllers
                     _userProcRepository.Add(userViewModel2);
 
                     return RedirectToAction("Index");
-                } else
+                }
+                else
                 {
                     ModelState.AddModelError("", "This account has already existed!");
-                }             
+                }
             }
 
             ViewBag.RoleID = new SelectList(db.Roles, "ID", "Name", userViewModel.RoleID);
@@ -163,6 +165,27 @@ namespace ProductManagement.Areas.Admin.Controllers
             Session[Common.CommonConstant.USER_SESSTION] = null;
             Session.Clear();
             return RedirectToAction("Index", "../Login");
+        }
+
+        private List<Role> roles()
+        {
+            var listRole = db.Roles.ToList();
+            return listRole;
+        }
+
+        private List<User> compareList(List<User> users, List<Role> roles)
+        {
+            foreach (var item in roles)
+            {
+                foreach (var item2 in users)
+                {
+                    if (item.ID == item2.RoleID)
+                    {
+                        item2.Role = item;
+                    }
+                }
+            }
+            return users;
         }
     }
 }
