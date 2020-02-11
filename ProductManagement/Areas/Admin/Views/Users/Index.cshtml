@@ -10,56 +10,56 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
-    <link href="~/Content/Product/ProductTable.css" rel="stylesheet" />
+    <link href="~/Content/User/ResponsiveTable.css" rel="stylesheet" />
 </head>
 <body>
     <h2>Users Management</h2>
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-    
+    <table role="table">
 
-    <table class="table table-bordered table-customize table-responsive">
-        <tbody>
-            <tr>
-                <th>
+        <thead role="rowgroup">
+            <tr role="row">
+                <th role="columnheader">
                     RoleName
                 </th>
-                <th>
+                <th role="columnheader">
                     @Html.DisplayNameFor(model => model.UserName)
                 </th>
-                <th>
+                <th role="columnheader">
                     @Html.DisplayNameFor(model => model.Name)
                 </th>
-                <th>
+                <th role="columnheader">
                     @Html.DisplayNameFor(model => model.Email)
                 </th>
-                <th>
+                <th role="columnheader">
                     @Html.DisplayNameFor(model => model.Status)
                 </th>
-                <th></th>
+                <th role="columnheader"></th>
             </tr>
+        </thead>
 
+        <tbody role="rowgroup>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
+                <tr role="row">
+                    <td role="gridcell">
                         @Html.DisplayFor(modelItem => item.Role.Name)
                     </td>
-                    <td>
+                    <td role="gridcell">
                         @Html.DisplayFor(modelItem => item.UserName)
                     </td>
-                    <td>
+                    <td role="gridcell">
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
-
-                    <td>
+                    <td role="gridcell">
                         @Html.DisplayFor(modelItem => item.Email)
                     </td>
-                    <td>
+                    <td role="gridcell">
                         @Html.DisplayFor(modelItem => item.Status)
                     </td>
-                    <td>
+                    <td role="gridcell">
                         @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
                         @Html.ActionLink("Details", "Details", new { id = item.ID }) |
                         @Html.ActionLink("Delete", "Delete", new { id = item.ID })
@@ -68,6 +68,5 @@
             }
         </tbody>
     </table>
-    
 </body>
 </html>

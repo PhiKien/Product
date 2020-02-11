@@ -28,9 +28,9 @@ namespace ProductManagement.Areas.Admin.Controllers
         // GET: Admin/Users
         public ActionResult Index()
         {
-            var list = db.Users.Include(u => u.Role).ToList();
-            //var listUser = compareList((List<User>)_userProcRepository.GetAll(), roles());
-            return View(_userProcRepository.GetAll());
+            //var list = db.Users.Include(u => u.Role).ToList();
+            var listUser = compareList((List<User>)_userProcRepository.GetAll(), roles());
+            return View(listUser);
         }        
 
         // GET: Admin/Users/Details/5
