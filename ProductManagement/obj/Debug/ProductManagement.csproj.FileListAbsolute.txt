@@ -496,7 +496,6 @@ C:\Users\PC_KIEN\Desktop\Product\ProductManagement\obj\Debug\ProductManagement.c
 C:\Users\PC_KIEN\Desktop\Product\ProductManagement\obj\Debug\ProductManagement.Migrations.init.resources
 C:\Users\PC_KIEN\Desktop\Product\ProductManagement\obj\Debug\ProductManagement.Migrations.initdatafirst.resources
 C:\Users\PC_KIEN\Desktop\Product\ProductManagement\obj\Debug\ProductManagement.csproj.GenerateResource.cache
-C:\Users\PC_KIEN\Desktop\Product\ProductManagement\obj\Debug\ProductManagement.csproj.CoreCompileInputs.cache
 C:\Users\PC_KIEN\Desktop\Product\ProductManagement\obj\Debug\ProductManagement.csproj.CopyComplete
 C:\Users\PC_KIEN\Desktop\Product\ProductManagement\obj\Debug\ProductManagement.dll
 C:\Users\PC_KIEN\Desktop\Product\ProductManagement\obj\Debug\ProductManagement.pdb

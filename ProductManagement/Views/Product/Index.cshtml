@@ -15,10 +15,11 @@
     pro.init();
 </script>
 
-<div class="main-div-index">
+<div class="main-div-index right">
     <div class="div-btn-cretae">
-        <button class="btn-create">
-            @Html.ActionLink("New Product", "Create", new { }, new { @class = "text-aliceblue" })
+        <button style="color:white" class="btn-create">
+            @*@Html.ActionLink("New Product", "#", new { @class = "text-aliceblue" })*@
+            New product
         </button>
     </div>
     <br />
@@ -29,12 +30,13 @@
                 <div class="item-name-desc">
                     <h3 style="margin-left:30px"><b>@Html.DisplayFor(modelItem => item.Name)</b></h3>
                     <h3 style="margin-left:30px">@Html.DisplayFor(modelItem => item.Description)</h3>
+                    <div class="item-info">
+                        <div class="item-numberinstock">
+                            Instock: @Html.DisplayFor(modelItem => item.NumberInStock)
+                        </div>
+                    </div>
                 </div>
-                <div class="item-info">
-                    <div class="item-numberinstock">
-                        Instock: @Html.DisplayFor(modelItem => item.NumberInStock)
-                    </div>                    
-                </div>
+                
             </div>
             <br />
             <br />
@@ -55,16 +57,21 @@
         <div class="item-name-desc">
             <h3 style="margin-left:30px"><b>{{Name}}</b></h3>
             <h3 style="margin-left:30px">{{Description}}</h3>
-        </div>
-        <div class="item-info">
-            <div class="item-numberinstock">
-                Instock: {{NumberInStock}}
-            </div>                      
-        </div>
+            <div class="item-info">
+                <div class="item-numberinstock">
+                    Instock: {{NumberInStock}}
+                </div>
+            </div>
+        </div>       
     </div>
     <br />
     <br />
     <div class="paged-list-pager">      
         @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
     </div>
+</script>
+<script>
+    $('.btn-create').click(function () {
+        alert('Để cho giống design thôi  ಠ_ರೃ');
+    });
 </script>

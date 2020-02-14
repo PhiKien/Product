@@ -55,10 +55,10 @@
                     <td role="gridcell">
                         @Html.DisplayFor(modelItem => item.NumberInStock)
                     </td>
-                    <td role="gridcell">
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    <td role="gridcell">                      
+                        <a href="/Admin/Products/Edit/@item.ID"><img style="width:18px; height:18px" src="~/Assets/Admin/img/edit.svg" title="Edit product"/></a>|
+                        <a href="/Admin/Products/Details/@item.ID"><img style="width:18px; height:18px" src="~/Assets/Admin/img/search.svg" title="Details product"/></a>|
+                        <a href="/Admin/Products/Delete/@item.ID"><img style="width:18px; height:18px" src="~/Assets/Admin/img/bin.svg" title="Delete product"/></a>
                     </td>
                 </tr>
             }
