@@ -10,22 +10,19 @@ namespace ProductManagement.Models
     [Table("Product")]
     public class Product
     {
+
         public Product()
         {
 
         }
 
-        public Product(int iD, string name, string description, int numberInStock, int categoryID, Category category) : this(iD, name, description, numberInStock, categoryID)
-        {
-            Category = category;
-        }
-
-        public Product(int iD, string name, string description, int numberInStock, Category category)
+        public Product(int iD, string name, string description, int numberInStock, int categoryID, Category category) 
         {
             ID = iD;
             Name = name;
             Description = description;
             NumberInStock = numberInStock;
+            CategoryID = categoryID;
             Category = category;
         }
 
@@ -45,6 +42,16 @@ namespace ProductManagement.Models
             NumberInStock = numberInStock;
             CategoryID = categoryID;
         }
+
+        public Product(int iD, string name, string description, int numberInStock, Category category)
+        {
+            ID = iD;
+            Name = name;
+            Description = description;
+            NumberInStock = numberInStock;
+            Category = category;
+        }
+
 
         [Key]
         public int ID { get; set; }

@@ -25,7 +25,7 @@ namespace ProductManagement
                 cfg.CreateMap<Product, ProductViewModel>();
                 cfg.CreateMap<Category, CategoryViewModel>();
                 cfg.CreateMap<User, UserViewModel>();
-                cfg.CreateMap<ProductViewModel, Product>().ConstructUsing(p => new Product(p.ID, p.Name, p.Description, p.NumberInStock, p.CategoryID));
+                cfg.CreateMap<ProductViewModel, Product>().ConstructUsing(p => new Product(p.ID, p.Name, p.Description, p.NumberInStock, p.CategoryID, p.Category));
                 cfg.CreateMap<CategoryViewModel, Category>().ConstructUsing(c => new Category(c.ID, c.Name));
                 cfg.CreateMap<UserViewModel, User>().ConstructUsing(u => new User(u.ID, u.UserName, u.Password, u.Name, u.Address, u.Email, u.Phone, u.CreateDate, u.ModifiedDate, u.Status, u.RoleID));
                 //...

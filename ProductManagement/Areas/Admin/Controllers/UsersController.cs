@@ -40,7 +40,9 @@ namespace ProductManagement.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             User user = _userProcRepository.GetById(id);
+            user.Role = GetRole(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -172,6 +174,11 @@ namespace ProductManagement.Areas.Admin.Controllers
         {
             var listRole = db.Roles.ToList();
             return listRole;
+        }
+
+        private Role GetRole(long? id)
+        {
+            return db.Roles.Single(r => r.ID == id);
         }
 
         private List<User> compareList(List<User> users, List<Role> roles)

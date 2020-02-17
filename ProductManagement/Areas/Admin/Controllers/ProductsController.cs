@@ -42,7 +42,7 @@ namespace ProductManagement.Areas.Admin.Controllers
             }
 
             var product = _productProcRepository.GetById(id);
-
+            product.Category = GetCategory(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -178,6 +178,11 @@ namespace ProductManagement.Areas.Admin.Controllers
                 }
             }
             return products;
+        }
+
+        private Category GetCategory(int? id)
+        {
+            return db.Categorys.Single(c => c.ID == id);
         }
     }
 }

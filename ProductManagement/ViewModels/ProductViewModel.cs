@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProductManagement.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,6 +9,7 @@ namespace ProductManagement.ViewModels
 {
     public class ProductViewModel
     {
+
         public int ID { get; set; }
 
         [Required]
@@ -24,5 +26,7 @@ namespace ProductManagement.ViewModels
 
         [Required]
         public int CategoryID { get; set; }
+
+        public Category Category { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using ProductManagement.Common;
 using ProductManagement.Models;
 using ProductManagement.Repository.Interface;
 using ProductManagement.UnitOfWorks;
+using ProductManagement.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -41,7 +42,31 @@ namespace ProductManagement.Repository.Implement
 
         public IEnumerable<Product> GetAll()
         {
-            var listProduct = _context.Database.SqlQuery<Product>(CommonConstantProc.PROC_GET_ALL_PRODUCT).ToList();
+            var employeeRecord = from p in _context.Products
+                                 join c in _context.Categorys on p.CategoryID equals c.ID into table1
+                                 from c in table1.ToList()                              
+                                 select new Product
+                                 {
+                                     _context.Products = p,
+                                     department = d,                                   
+                                 };
+
+
+
+            //var employeeRecord = from e in employees
+            //                     join d in departments on e.Department_Id equals d.DepartmentId into table1
+            //                     from d in table1.ToList()
+            //                     join i in incentives on e.Incentive_Id equals i.IncentiveId into table2
+            //                     from i in table2.ToList()
+            //                     select new ViewModel
+            //                     {
+            //                         employee = e,
+            //                         department = d,
+            //                         incentive = i
+            //                     };
+
+            var listProduct = _context.Database.SqlQuery<Product>("select * from Product p join Category c on p.CategoryID = c.ID").ToList();
+            //var listProduct = _context.Database.SqlQuery<Product>(CommonConstantProc.PROC_GET_ALL_PRODUCT).ToList();
             return listProduct;
         }
 
