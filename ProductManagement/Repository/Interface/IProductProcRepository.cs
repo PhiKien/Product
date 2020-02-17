@@ -10,7 +10,7 @@ namespace ProductManagement.Repository.Interface
 {
     public interface IProductProcRepository
     {
-        IEnumerable<Product> GetAll();
+        IEnumerable<ProductViewModel2> GetAll();
 
         void Add(Product entity);
 

@@ -24,11 +24,11 @@ namespace ProductManagement.Areas.Admin.Controllers
         public ActionResult Index(int? page)
         {
             var products = _productProcRepository.GetAll();
-            var categorys = listCategory();
+            //var categorys = listCategory();
 
-            var listProduct = compareList((List<Product>)products, categorys);
+            //var listProduct = compareList((List<Product>)products, categorys);
 
-            var list = listProduct.OrderBy(p => p.ID);
+            var list = products.OrderBy(p => p.ID);
 
             return View(list.ToPagedList(page == null ? 1 : page.Value, 5));
         }

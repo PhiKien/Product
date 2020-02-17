@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProductManagement.Models.Product>
+﻿@model IEnumerable<ProductManagement.ViewModels.ProductViewModel2>
 @using PagedList;
 @using PagedList.Mvc;
 
@@ -44,7 +44,7 @@
             {
                 <tr role="row">
                     <td role="gridcell">
-                        @Html.DisplayFor(modelItem => item.Category.Name)
+                        @Html.DisplayFor(modelItem => item.CategoryName)
                     </td>
                     <td role="gridcell">
                         @Html.DisplayFor(modelItem => item.Name)

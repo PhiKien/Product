@@ -40,18 +40,19 @@ namespace ProductManagement.Repository.Implement
             _context.Database.ExecuteSqlCommand(CommonConstantProc.PROC_DELETE_PRODUCT, paramID);
         }
 
-        public IEnumerable<Product> GetAll()
+        public IEnumerable<ProductViewModel2> GetAll()
         {
-            var employeeRecord = from p in _context.Products
-                                 join c in _context.Categorys on p.CategoryID equals c.ID into table1
-                                 from c in table1.ToList()                              
-                                 select new Product
-                                 {
-                                     _context.Products = p,
-                                     department = d,                                   
-                                 };
+            //List<ViewModel> viewModels = new List<ViewModel>();
+            var productRecord = from p in _context.Products
+                                join c in _context.Categorys on p.CategoryID equals c.ID into table1
+                                from c in table1.ToList()
+                                select new ViewModel
+                                {
+                                    product = p,
+                                    category = c
+                                };
 
-
+            //viewModels = employeeRecord.ToList();
 
             //var employeeRecord = from e in employees
             //                     join d in departments on e.Department_Id equals d.DepartmentId into table1
@@ -65,8 +66,9 @@ namespace ProductManagement.Repository.Implement
             //                         incentive = i
             //                     };
 
-            var listProduct = _context.Database.SqlQuery<Product>("select * from Product p join Category c on p.CategoryID = c.ID").ToList();
-            //var listProduct = _context.Database.SqlQuery<Product>(CommonConstantProc.PROC_GET_ALL_PRODUCT).ToList();
+            //var listProduct2 = _context.Database.SqlQuery<ProductViewModel2>("SELECT [Extent1].[ID] AS[ID],[Extent1].[Name] AS[Name],[Extent1].[Description] AS[Description],[Extent1].[NumberInStock] AS[NumberInStock],[Extent1].[CategoryID] AS[CategoryID],[Extent2].[Name] AS[CategoryName]FROM[dbo].[Product] AS[Extent1] INNER JOIN [dbo].[Category] AS [Extent2] ON [Extent1].[CategoryID] = [Extent2].[ID]").ToList();
+
+            var listProduct = _context.Database.SqlQuery<ProductViewModel2>(CommonConstantProc.PROC_GET_ALL_PRODUCT).ToList();
             return listProduct;
         }
 
