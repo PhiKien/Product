@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProductManagement.Models.User>
+﻿@model IEnumerable<ProductManagement.ViewModels.UserViewModel2>
 
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -45,7 +45,7 @@
             {
                 <tr role="row">
                     <td role="gridcell">
-                        @Html.DisplayFor(modelItem => item.Role.Name)
+                        @Html.DisplayFor(modelItem => item.RoleName)
                     </td>
                     <td role="gridcell">
                         @Html.DisplayFor(modelItem => item.UserName)

@@ -28,9 +28,10 @@ namespace ProductManagement.Areas.Admin.Controllers
 
             //var listProduct = compareList((List<Product>)products, categorys);
 
-            var list = products.OrderBy(p => p.ID);
+            //var list = products.OrderBy(p => p.ID);
 
-            return View(list.ToPagedList(page == null ? 1 : page.Value, 5));
+            //return View(list.ToPagedList(page == null ? 1 : page.Value, 5));
+            return View(products);
         }
 
         // GET: Admin/Products/Details/5
@@ -42,7 +43,7 @@ namespace ProductManagement.Areas.Admin.Controllers
             }
 
             var product = _productProcRepository.GetById(id);
-            product.Category = GetCategory(id);
+           // product.Category = GetCategory(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -101,9 +102,7 @@ namespace ProductManagement.Areas.Admin.Controllers
         public ActionResult Edit([Bind(Include = "ID,Name,Description,NumberInStock,CategoryID")] Product product)
         {
             if (ModelState.IsValid)
-            {
-                //db.Entry(product).State = EntityState.Modified;
-                //db.SaveChanges();
+            {                
                 _productProcRepository.Update(product);
                 return RedirectToAction("Index");
             }
@@ -157,32 +156,6 @@ namespace ProductManagement.Areas.Admin.Controllers
             return categorys;
         }
 
-        //get category by id
-        private Category getCategoryByID(int id)
-        {
-            var category = db.Database.SqlQuery<Category>(CommonConstantProc.PROC_GET_CATEGORY_BY_ID, id).Single();
-            return category;
-        }
-
-        //compare and assign
-        private List<Product> compareList(List<Product> products, List<Category> categories)
-        {
-            foreach (var item in categories)
-            {
-                foreach (var item2 in products)
-                {
-                    if (item.ID == item2.CategoryID)
-                    {
-                        item2.Category = item;
-                    }
-                }
-            }
-            return products;
-        }
-
-        private Category GetCategory(int? id)
-        {
-            return db.Categorys.Single(c => c.ID == id);
-        }
+        
     }
 }

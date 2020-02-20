@@ -14,6 +14,7 @@ namespace ProductManagement.Common
         {
             var session = (UserLogin)HttpContext.Current.Session[CommonConstant.USER_SESSTION];
             //List<int> privilegeLevels = this.GetCredentiaByLoggedInUser();      privilegeLevels.Contains(session.RoleID)
+            
             if (session.RoleID == RoleID)
             {
                 return true;

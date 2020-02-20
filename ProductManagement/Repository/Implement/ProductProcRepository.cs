@@ -43,14 +43,14 @@ namespace ProductManagement.Repository.Implement
         public IEnumerable<ProductViewModel2> GetAll()
         {
             //List<ViewModel> viewModels = new List<ViewModel>();
-            var productRecord = from p in _context.Products
-                                join c in _context.Categorys on p.CategoryID equals c.ID into table1
-                                from c in table1.ToList()
-                                select new ViewModel
-                                {
-                                    product = p,
-                                    category = c
-                                };
+            //var productRecord = from p in _context.Products
+            //                    join c in _context.Categorys on p.CategoryID equals c.ID into table1
+            //                    from c in table1.ToList()
+            //                    select new ViewModel
+            //                    {
+            //                        product = p,
+            //                        category = c
+            //                    };
 
             //viewModels = employeeRecord.ToList();
 
@@ -72,10 +72,10 @@ namespace ProductManagement.Repository.Implement
             return listProduct;
         }
 
-        public Product GetById(int? id)
+        public ProductViewModel2 GetById(int? id)
         {
-            var listProduct = _context.Database.SqlQuery<Product>(CommonConstantProc.PROC_GET_PRODUCT_BY_ID, new SqlParameter("@productID", id)).Single();
-            return listProduct;
+            var product = _context.Database.SqlQuery<ProductViewModel2>(CommonConstantProc.PROC_GET_PRODUCT_BY_ID, new SqlParameter("@productID", id)).Single();
+            return product;
         }
 
         public void Update(Product product)

@@ -18,6 +18,6 @@ namespace ProductManagement.Repository.Interface
 
         void Update(Product products);
 
-        Product GetById(int? id);
+        ProductViewModel2 GetById(int? id);
     }
 }

@@ -5,11 +5,11 @@
 @{
     ViewBag.Title = "Index";
 }
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
 <script src="~/Scripts/modernizr-2.8.3.js"></script>
 <script src="~/Scripts/mustache.js"></script>
 <script src="~/Scripts/Product/index.js"></script>
-
 <script type="text/javascript">
     var pro = new productController();
     pro.init();
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
             <br />
             <br />
@@ -62,13 +62,13 @@
                     Instock: {{NumberInStock}}
                 </div>
             </div>
-        </div>       
+        </div>
     </div>
     <br />
     <br />
-    <div class="paged-list-pager">      
+    @*<div class="paged-list-pager">
         @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
-    </div>
+    </div>*@
 </script>
 <script>
     $('.btn-create').click(function () {

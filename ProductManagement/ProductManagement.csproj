@@ -202,6 +202,7 @@
     <Compile Include="Models\ProductContext.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="ViewModels\UserViewModel2.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

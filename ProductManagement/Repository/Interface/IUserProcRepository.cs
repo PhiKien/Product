@@ -10,7 +10,7 @@ namespace ProductManagement.Repository.Interface
 {
     public interface IUserProcRepository
     {
-        IEnumerable<User> GetAll();
+        IEnumerable<UserViewModel2> GetAll();
 
         void Add(UserViewModel entity);
 
@@ -18,6 +18,6 @@ namespace ProductManagement.Repository.Interface
 
         void Update(User user);
 
-        User GetById(long? id);
+        UserViewModel2 GetById(long? id);
     }
 }

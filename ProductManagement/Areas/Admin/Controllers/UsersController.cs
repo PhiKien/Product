@@ -28,9 +28,7 @@ namespace ProductManagement.Areas.Admin.Controllers
         // GET: Admin/Users
         public ActionResult Index()
         {
-            //var list = db.Users.Include(u => u.Role).ToList();
-            var listUser = compareList((List<User>)_userProcRepository.GetAll(), roles());
-            return View(listUser);
+            return View(_userProcRepository.GetAll());
         }        
 
         // GET: Admin/Users/Details/5
@@ -41,8 +39,8 @@ namespace ProductManagement.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            User user = _userProcRepository.GetById(id);
-            user.Role = GetRole(id);
+            var user = _userProcRepository.GetById(id);
+
             if (user == null)
             {
                 return HttpNotFound();
@@ -104,8 +102,9 @@ namespace ProductManagement.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = _userProcRepository.GetById(id);
-            //User user2 = new User(user.UserName, user.Password, user.Name, user.Address, user.Email, user.Phone, user.CreateDate, user.Status, user.RoleID);
+
+            var user = _userProcRepository.GetById(id);
+            
             if (user == null)
             {
                 return HttpNotFound();
@@ -123,6 +122,7 @@ namespace ProductManagement.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                user.Password = Encryptor.MD5Hash(user.Password);
                 _userProcRepository.Update(user);
                 return RedirectToAction("Index");
             }
@@ -137,7 +137,7 @@ namespace ProductManagement.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = _userProcRepository.GetById(id);
+            var user = _userProcRepository.GetById(id);
             if (user == null)
             {
                 return HttpNotFound();

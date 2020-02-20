@@ -48,14 +48,14 @@ namespace ProductManagement.Repository.Implement
             _context.Database.ExecuteSqlCommand(CommonConstantProc.PROC_DELETE_USER, new SqlParameter("@userID", id));            
         }
 
-        public IEnumerable<User> GetAll()
+        public IEnumerable<UserViewModel2> GetAll()
         {
-            return _context.Database.SqlQuery<User>(CommonConstantProc.PROC_GET_ALL_USER).ToList();
+            return _context.Database.SqlQuery<UserViewModel2>(CommonConstantProc.PROC_GET_ALL_USER).ToList();
         }
 
-        public User GetById(long? id)
+        public UserViewModel2 GetById(long? id)
         {
-            return _context.Database.SqlQuery<User>(CommonConstantProc.PROC_GET_USER_BY_ID, new SqlParameter("@userID", id)).Single();
+            return _context.Database.SqlQuery<UserViewModel2>(CommonConstantProc.PROC_GET_USER_BY_ID, new SqlParameter("@userID", id)).Single();
         }
 
         public void Update(User model)

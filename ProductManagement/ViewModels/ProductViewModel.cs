@@ -27,6 +27,5 @@ namespace ProductManagement.ViewModels
         [Required]
         public int CategoryID { get; set; }
 
-        public Category Category { get; set; }
     }
 }

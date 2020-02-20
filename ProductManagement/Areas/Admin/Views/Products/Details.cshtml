@@ -1,4 +1,4 @@
-﻿@model ProductManagement.Models.Product
+﻿@model ProductManagement.ViewModels.ProductViewModel2
 
 @{
     ViewBag.Title = "Details";
@@ -16,7 +16,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Category.Name)
+            @Html.DisplayFor(model => model.CategoryName)
         </dd>
 
         <dt>

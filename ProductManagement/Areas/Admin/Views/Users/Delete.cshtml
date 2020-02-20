@@ -1,4 +1,4 @@
-﻿@model ProductManagement.Models.User
+﻿@model ProductManagement.ViewModels.UserViewModel2
 
 @{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -18,11 +18,11 @@
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.Role.Name)
+                @Html.DisplayNameFor(model => model.RoleName)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.Role.Name)
+                @Html.DisplayFor(model => model.RoleName)
             </dd>
     
             <dt>

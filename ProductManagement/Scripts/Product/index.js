@@ -84,6 +84,7 @@
             dataType: 'json',
             success: function (response) {
                 $("#list_product").empty();
+                console.log(response);
                 $.each(response, function (i, item) {
                     html1 += Mustache.render(template, {
                         ID: item.ID,
